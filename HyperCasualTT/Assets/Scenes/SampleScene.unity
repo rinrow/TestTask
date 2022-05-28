@@ -619,6 +619,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 296751442, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 554899934112084073, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -633,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 554899934112084073, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.04
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 554899934112084073, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -674,6 +678,10 @@ PrefabInstance:
     - target: {fileID: 919132148457009242, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
       propertyPath: _speed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132148457009242, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
+      propertyPath: _bulletFlyingDistance
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 934697172443802323, guid: d3e440a68c8b3574fa8fbcefbe21405a, type: 3}
       propertyPath: m_Name
