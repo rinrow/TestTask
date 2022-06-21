@@ -19,26 +19,27 @@ public class BulletPool : MonoBehaviour
             Instance = this;
 
         _pulledObjects = new List<Bullet>();
-
-        for (int i = 0; i < _poolCount; i++)
-        {
-            var temporary = Instantiate(_objectToPool, transform);
-            temporary.gameObject.SetActive(false);
-            _pulledObjects.Add(temporary);
-        }
     }
 
-    public bool TryGetBullet(out Bullet bullet, Vector3 position)
+    private void InitBullet()
     {
-        bullet = null;
+        var temporary = Instantiate(_objectToPool, transform);
+        temporary.gameObject.SetActive(false);
+        _pulledObjects.Add(temporary);
+    }
+
+    public Bullet GetBullet(Vector3 position)
+    {
         foreach (var item in _pulledObjects)
             if (!item.gameObject.activeInHierarchy)
             {
-                bullet = item;
-                bullet.transform.position = position;
-                bullet.gameObject.SetActive(true);
-                return true;
+                item.transform.position = position;
+                item.gameObject.SetActive(true);
+                return item;
             }
-        return false;
+
+        _poolCount++;
+        InitBullet();
+        return _pulledObjects[_pulledObjects.Count - 1];
     }
 }

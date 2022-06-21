@@ -14,5 +14,11 @@ public class GameStart : MonoBehaviour
             _playerMovement.GoTotTheNextPoint();
             Destroy(gameObject);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _playerMovement.GoTotTheNextPoint();
+            Destroy(gameObject);
+        }
     }
 }

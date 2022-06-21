@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [Range(0.5f, 15f)]
+    [Range(0.5f, 10f)]
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     [SerializeField] private float _shootingGup;
@@ -14,16 +14,23 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         _time += Time.deltaTime;
+
+        //Для мобилок
         if (Input.touchCount == 1 && _time > _shootingGup)
         {
-            var touch = Input.GetTouch(0);
-            var r = Camera.main.ScreenPointToRay(touch.position);
-            if (Physics.Raycast(r, out RaycastHit hit))
-            {
-                _time = 0;
+            var touchPos = Input.GetTouch(0).position;
+            var correctTouchPos = new Vector3(touchPos.x, touchPos.y, 25);
+            var shootPoint = Camera.main.ScreenToWorldPoint(correctTouchPos);
+            Shoot(shootPoint);
+        }
 
-                Shoot(hit.point);
-            }
+        //Для пк
+        if (Input.GetMouseButtonDown(0))
+        {
+            var correctMousePos = Input.mousePosition;
+            correctMousePos.z = 25;
+            var shootPoint = Camera.main.ScreenToWorldPoint(correctMousePos);
+            Shoot(shootPoint);
         }
     }
 
@@ -35,12 +42,11 @@ public class PlayerShooting : MonoBehaviour
     IEnumerator LaunchABullet(Vector3 direction)
     {
         print(direction);
-        Bullet bullet;
-        if (!BulletPool.Instance.TryGetBullet(out bullet, transform.position)) yield break;
+        var bullet = BulletPool.Instance.GetBullet(transform.position); ;
 
         bullet.Init(_damage);
         var delta = 0f;
-        while (delta < 1/_speed)
+        while (delta < 1 / _speed)
         {
             yield return null;
 
@@ -50,5 +56,6 @@ public class PlayerShooting : MonoBehaviour
             delta += Time.deltaTime;
             bullet.transform.position = Vector3.Lerp(transform.position, direction, delta * _speed);
         }
+        bullet.gameObject.SetActive(false);
     }
 }

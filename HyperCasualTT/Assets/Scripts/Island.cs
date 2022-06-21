@@ -11,7 +11,7 @@ public class Island : MonoBehaviour
 
     void Start()
     {
-        _enemies = GetComponentsInChildren<Enemy>().ToList<Enemy>();
+        _enemies = GetComponentsInChildren<Enemy>().ToList();
 
         foreach (var enemy in _enemies)
         {

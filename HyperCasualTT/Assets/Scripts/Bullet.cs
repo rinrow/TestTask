@@ -23,7 +23,5 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent<Enemy>(out Enemy enemy))
             enemy.ApplyDamage(_damage);
-        if (!other.CompareTag("IgnoreCollision"))
-            gameObject.SetActive(false);
     }
 }

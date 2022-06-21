@@ -27,14 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator StopAnimationWhenInTheCurrentPoint(Vector3 targetPoint)
     {
-        while (true)
+        while (transform.position.x != targetPoint.x)
         {
             yield return null;
-            if (transform.position.x == targetPoint.x)
-            {
-                _playerAnimator.Play("Idle");
-                yield break;
-            }
         }
+        _playerAnimator.Play("Idle");
     }
 }
